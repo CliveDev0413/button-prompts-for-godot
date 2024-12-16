@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyl813ovmcydq"]
+
+[ext_resource type="Script" path="res://addons/button_prompts_for_godot/Scripts/button_prompt_text.gd" id="1_b7s10"]
+
+[node name="Button Prompt Text" type="RichTextLabel"]
+offset_top = -1.0
+offset_right = 163.0
+offset_bottom = 39.0
+bbcode_enabled = true
+text = "Press [img region=1,1,100,100]res://addons/button_prompts_for_godot/Textures/controller/dualshock4.png[/img]"
+script = ExtResource("1_b7s10")

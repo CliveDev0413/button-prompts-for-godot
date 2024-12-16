@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bi0xbjfiw4r85"]
+
+[ext_resource type="Texture2D" uid="uid://dlsjm1yyq3uac" path="res://addons/button_prompts_for_godot/Demo Scene/ground.png" id="1_p4eo6"]
+[ext_resource type="PackedScene" uid="uid://r1ina21dlnd1" path="res://addons/button_prompts_for_godot/Demo Scene/Player/demo_player.tscn" id="2_e1vfc"]
+[ext_resource type="PackedScene" uid="uid://crw6rxph15rpo" path="res://addons/button_prompts_for_godot/Scenes/button_prompt.tscn" id="3_yayay"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iiyoc"]
+size = Vector2(578, 259)
+
+[node name="Button Prompts Demo Scene" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(0, 200)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+scale = Vector2(4.51563, 4.04688)
+texture = ExtResource("1_p4eo6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_iiyoc")
+
+[node name="Demo Player" parent="." instance=ExtResource("2_e1vfc")]
+
+[node name="Button Prompt" parent="." instance=ExtResource("3_yayay")]
+position = Vector2(52, -22)
+scale = Vector2(0.255, 0.255)
+ACTION = "test2"

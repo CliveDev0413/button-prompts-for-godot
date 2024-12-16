@@ -1,0 +1,23 @@
+{
+    "0": 0, (Bottom Action, Sony Cross, Xbox A, Nintendo B)
+    "1": 1, (Right Action, Sony Circle, Xbox B, Nintendo A)
+    "2": 2, (Left Action, Sony Square, Xbox X, Nintendo Y)
+    "3": 3, (Top Action, Sony Triangle, Xbox Y, Nintendo X)
+    "4": 4, (Back, Sony Select, Xbox Back, Nintendo -)
+    "5": 0, (Guide, Sony PS, Xbox Home)
+    "6": 5, (Start, Xbox Menu, Nintendo +)
+    "7": 6, (Left Stick, Sony L3, Xbox L/LS)
+    "8": 7, (Right Stick, Sony R3, Xbox R/RS)
+    "9": 8, (Left Shoulder, Sony L1, Xbox LB)
+    "10": 9, (Right Shoulder, Sony R1, Xbox RB)
+    "11": 10, (D-pad Up)
+    "12": 11, (D-pad Down)
+    "13": 12, (D-pad Left)
+    "14": 13, (D-pad Right)
+    "15": 14, (Xbox Share, PS5 Microphone, Nintendo Capture)
+    "20": 15, (PS4/5 Touchpad)
+    "left-stick": 16,
+    "right-stick": 17,
+    "left-trigger": 18, (Sony L2, Xbox LT)
+    "right-trigger": 19 (Sony R2, Xbox RT)
+}

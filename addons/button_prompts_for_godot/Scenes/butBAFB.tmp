@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://crw6rxph15rpo"]
+
+[ext_resource type="Script" path="res://Button Prompts for Godot/Scripts/button_prompt.gd" id="1_f1olf"]
+[ext_resource type="Texture2D" uid="uid://bbca1h0o1n8ir" path="res://Button Prompts for Godot/Textures/key_blank.png" id="1_fuj05"]
+[ext_resource type="Texture2D" uid="uid://by3kfks1w34gb" path="res://Button Prompts for Godot/Textures/keyboard_and_mouse/keyboard_dark.png" id="2_pb3cd"]
+[ext_resource type="Texture2D" uid="uid://bdsyv25kqkrls" path="res://Button Prompts for Godot/Textures/controller/dualsense.png" id="3_vk35r"]
+[ext_resource type="Texture2D" uid="uid://c1f066xg64yb0" path="res://Button Prompts for Godot/Textures/keyboard_and_mouse/mouse_dark.png" id="4_8jtua"]
+[ext_resource type="Texture2D" uid="uid://cthnf74ihx8jb" path="res://Button Prompts for Godot/Textures/controller/dualshock4.png" id="6_6hnjy"]
+[ext_resource type="Texture2D" uid="uid://2icqth61i3gx" path="res://Button Prompts for Godot/Textures/controller/xboxSeries.png" id="7_5hshy"]
+[ext_resource type="Texture2D" uid="uid://brynov13tpfgb" path="res://Button Prompts for Godot/Textures/controller/dualshock3.png" id="7_l48rw"]
+[ext_resource type="Texture2D" uid="uid://0i5xr3uiey58" path="res://Button Prompts for Godot/Textures/controller/xbox360.png" id="9_7o8r5"]
+
+[node name="Button Prompt" type="Node2D"]
+script = ExtResource("1_f1olf")
+
+[node name="Blank Icon" type="Sprite2D" parent="."]
+texture = ExtResource("1_fuj05")
+
+[node name="Keyboard_Dark" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_pb3cd")
+hframes = 10
+vframes = 10
+
+[node name="Mouse_Dark" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("4_8jtua")
+hframes = 2
+vframes = 2
+
+[node name="Dualsense" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_vk35r")
+hframes = 5
+vframes = 5
+
+[node name="Dualshock4" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("6_6hnjy")
+hframes = 5
+vframes = 5
+
+[node name="Dualshock3" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("7_l48rw")
+hframes = 5
+vframes = 5
+
+[node name="XboxSeries" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("7_5hshy")
+hframes = 5
+vframes = 5
+
+[node name="Xbox360" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("9_7o8r5")
+hframes = 5
+vframes = 5

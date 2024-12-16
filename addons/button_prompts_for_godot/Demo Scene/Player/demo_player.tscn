@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://r1ina21dlnd1"]
+
+[ext_resource type="Script" path="res://addons/button_prompts_for_godot/Demo Scene/Player/Player.gd" id="1_gwidn"]
+[ext_resource type="Texture2D" uid="uid://cb6mxl4on6gtu" path="res://addons/button_prompts_for_godot/Demo Scene/Player/block.png" id="1_yj351"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32x7m"]
+size = Vector2(16, 16)
+
+[node name="Demo Player" type="CharacterBody2D"]
+script = ExtResource("1_gwidn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yj351")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_32x7m")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(0, -20)
+zoom = Vector2(2.63, 2.63)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true

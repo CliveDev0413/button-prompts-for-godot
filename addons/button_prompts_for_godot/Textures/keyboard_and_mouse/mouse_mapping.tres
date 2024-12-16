@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="PromptMap" load_steps=2 format=3 uid="uid://dxrq6cidxfn6h"]
+
+[ext_resource type="Script" path="res://addons/button_prompts_for_godot/Scripts/prompt_map.gd" id="1_nhclw"]
+
+[resource]
+script = ExtResource("1_nhclw")
+map = {
+"mouse_button_left": 0.0,
+"mouse_button_middle": 2.0,
+"mouse_button_right": 1.0,
+"mouse_move": 5.0,
+"mouse_wheel_down": 4.0,
+"mouse_wheel_left": 2.0,
+"mouse_wheel_right": 2.0,
+"mouse_wheel_up": 3.0
+}

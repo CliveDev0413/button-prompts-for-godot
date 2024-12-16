@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://crw6rxph15rpo"]
+
+[ext_resource type="Script" path="res://addons/button_prompts_for_godot/Scripts/sprite_button_prompt.gd" id="1_f1olf"]
+[ext_resource type="Texture2D" uid="uid://bbca1h0o1n8ir" path="res://addons/button_prompts_for_godot/Textures/key_blank.png" id="1_fuj05"]
+
+[node name="Button Prompt" type="Sprite2D"]
+texture = ExtResource("1_fuj05")
+script = ExtResource("1_f1olf")

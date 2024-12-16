@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://bi0xbjfiw4r85"]
+
+[ext_resource type="Texture2D" uid="uid://dlsjm1yyq3uac" path="res://addons/button_prompts_for_godot/Demo Scene/ground.png" id="1_p4eo6"]
+[ext_resource type="Script" path="res://addons/button_prompts_for_godot/Scripts/ui_button_prompt.gd" id="1_w5gpe"]
+[ext_resource type="PackedScene" uid="uid://r1ina21dlnd1" path="res://addons/button_prompts_for_godot/Demo Scene/Player/demo_player.tscn" id="2_e1vfc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iiyoc"]
+size = Vector2(578, 259)
+
+[node name="Button Prompts Demo Scene" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonPromptLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(200, 42)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+offset_top = -99.0
+offset_right = 488.0
+offset_bottom = -15.0
+grow_vertical = 0
+theme_override_constants/line_separation = -5
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "use {test1}"
+fit_content = true
+scroll_active = false
+script = ExtResource("1_w5gpe")
+PROMPT_SCALE = 15.08
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(14, 141)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+scale = Vector2(4.51563, 4.04688)
+texture = ExtResource("1_p4eo6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_iiyoc")
+
+[node name="Demo Player" parent="." instance=ExtResource("2_e1vfc")]
