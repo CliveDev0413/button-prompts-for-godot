@@ -11,7 +11,7 @@ func _enter_tree() -> void:
 	add_custom_type("ButtonPromptLabel", "RichTextLabel", preload("res://addons/button_prompts_for_godot/Scripts/ui_button_prompt.gd"), preload("res://addons/button_prompts_for_godot/Icons/ui_button_prompt_icon.svg"));
 	
 	add_setting({
-		"name": category + "/light_themed_keyboard_and_mouse",
+		"name": category + "/prompts/light_themed_keyboard_and_mouse",
 		"type": TYPE_BOOL,
 		"hint": PROPERTY_HINT_NONE,
 		"usage": PROPERTY_USAGE_DEFAULT,
@@ -19,12 +19,52 @@ func _enter_tree() -> void:
 	});
 	
 	add_setting({
-		"name": category + "/positional_controller_button_prompts",
+		"name": category + "/prompts/positional_controller_button_prompts",
 		"type": TYPE_BOOL,
 		"hint": PROPERTY_HINT_NONE,
 		"usage": PROPERTY_USAGE_DEFAULT,
 		"default_value": false,
-	})
+	});
+	
+	add_setting({
+		"name": category + "/optional_supported_controllers/dualshock_4",
+		"type": TYPE_BOOL,
+		"hint": PROPERTY_HINT_NONE,
+		"usage": PROPERTY_USAGE_DEFAULT,
+		"default_value": true,
+	});
+	
+	add_setting({
+		"name": category + "/optional_supported_controllers/dualshock_3",
+		"type": TYPE_BOOL,
+		"hint": PROPERTY_HINT_NONE,
+		"usage": PROPERTY_USAGE_DEFAULT,
+		"default_value": true,
+	});
+	
+	add_setting({
+		"name": category + "/optional_supported_controllers/xbox_360",
+		"type": TYPE_BOOL,
+		"hint": PROPERTY_HINT_NONE,
+		"usage": PROPERTY_USAGE_DEFAULT,
+		"default_value": true,
+	});
+	
+	add_setting({
+		"name": category + "/optional_supported_controllers/steam_deck",
+		"type": TYPE_BOOL,
+		"hint": PROPERTY_HINT_NONE,
+		"usage": PROPERTY_USAGE_DEFAULT,
+		"default_value": true,
+	});
+	
+	add_setting({
+		"name": category + "/optional_supported_controllers/nintendo_switch",
+		"type": TYPE_BOOL,
+		"hint": PROPERTY_HINT_NONE,
+		"usage": PROPERTY_USAGE_DEFAULT,
+		"default_value": true,
+	});
 	
 	ProjectSettings.save();
 	

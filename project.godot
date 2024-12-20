@@ -10,8 +10,13 @@ config_version=5
 
 [Addons]
 
-ButtonPrompts/light_themed_keyboard_and_mouse=true
-ButtonPrompts/positional_controller_button_prompts=false
+ButtonPrompts/prompts/light_themed_keyboard_and_mouse=false
+ButtonPrompts/prompts/positional_controller_button_prompts=false
+ButtonPrompts/optional_supported_controllers/dualshock_4=true
+ButtonPrompts/optional_supported_controllers/dualshock_3=true
+ButtonPrompts/optional_supported_controllers/xbox_360=true
+ButtonPrompts/optional_supported_controllers/steam_deck=true
+ButtonPrompts/optional_supported_controllers/nintendo_switch=true
 
 [application]
 

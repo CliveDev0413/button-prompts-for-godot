@@ -19,7 +19,7 @@ func _ready() -> void:
 	assert(has_node("/root/button_prompts_manager"), "The Button Prompts manager could not be found. Please check if the Button Prompts plugin is enabled in Project > Project Settings > Plugins");
 	manager = get_node("/root/button_prompts_manager");
 	
-	light_keys = ProjectSettings.get_setting("Addons/ButtonPrompts/light_themed_keyboard_and_mouse");
+	light_keys = ProjectSettings.get_setting("Addons/ButtonPrompts/prompts/light_themed_keyboard_and_mouse");
 
 func _input(event) -> void:
 	if event is InputEventKey || event is InputEventMouseMotion:

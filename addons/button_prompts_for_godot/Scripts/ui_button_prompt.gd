@@ -23,7 +23,7 @@ func _ready() -> void:
 	assert(has_node("/root/button_prompts_manager"), "The Button Prompts manager could not be found. Please check if the Button Prompts plugin is enabled.");
 	manager = get_node("/root/button_prompts_manager");
 	
-	light_keys = ProjectSettings.get_setting("Addons/ButtonPrompts/light_themed_keyboard_and_mouse");
+	light_keys = ProjectSettings.get_setting("Addons/ButtonPrompts/prompts/light_themed_keyboard_and_mouse");
 	
 	actions = get_all_actions_in_text();
 	og_text = text;
