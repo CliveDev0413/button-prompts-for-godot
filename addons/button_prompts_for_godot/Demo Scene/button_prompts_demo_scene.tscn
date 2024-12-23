@@ -55,4 +55,4 @@ position = Vector2(65, -27)
 scale = Vector2(0.36, 0.36)
 texture = ExtResource("4_4i5v6")
 script = ExtResource("5_rv6l3")
-ACTION = "down"
+ACTION = "click"

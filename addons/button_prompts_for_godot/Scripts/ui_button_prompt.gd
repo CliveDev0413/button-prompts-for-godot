@@ -12,6 +12,9 @@ var light_keys;
 var actions: Array;
 var og_text: String;
 
+var keybord_mouse_handler = Keyboard_Mouse_Input_Handler.new();
+var controller_handler = Controller_Input_Handler.new();
+
 func _enter_tree() -> void:
 	bbcode_enabled = true;
 	fit_content = true;
@@ -28,122 +31,77 @@ func _ready() -> void:
 	actions = get_all_actions_in_text();
 	og_text = text;
 
+	keybord_mouse_handler.on_keyboard_mouse_input.connect(_on_keyboard_mouse_input);
+	controller_handler.on_controller_input.connect(_on_controller_input);
+
 func _input(event):	
-	if event is InputEventKey or event is InputEventMouseMotion:
-		
+	if keybord_mouse_handler.detects_input(event):
 		if using_keyboard: return;
-		
+
 		using_keyboard = true;
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE;
 		restart_text();
-		process_keyboard_input();
-
-	elif event is InputEventJoypadButton or (event is InputEventJoypadMotion && abs(event.axis_value) > 0.5):
-				
+		for action in actions:
+			keybord_mouse_handler.process_input(action);
+	elif controller_handler.detects_input(event):
 		if !using_keyboard: return;
-		
+
 		using_keyboard = false;
-		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN;
-		manager.get_controller_type(Input.get_joy_name(Input.get_connected_joypads().find(event.device)))
 		restart_text();
-		process_controller_input();
+		manager.get_controller_type(Input.get_joy_name(Input.get_connected_joypads().find(event.device)));
+		for action in actions:
+			controller_handler.process_input(action);
 
-func process_keyboard_input():
-	for action in actions:
-		var inputs = InputMap.action_get_events(action);
+func _on_keyboard_mouse_input(key_name, mouse_properties, action):
+	var sprite: String;
 		
-		assert(inputs.size() != 0, "The action, " + action + ", has no events. Or the action is non-existent.");
+	if mouse_properties != null:
+		if light_keys:
+			sprite = "mouse_light";
+		else:
+			sprite = "mouse_dark";
 		
-		var key_name: String = "";
-		var mouse_properties: InputEventMouseButton = null;
+		var frame = manager.mouse_button_index_to_name(mouse_properties.button_index).to_lower();
+		var region: Vector2 = get_frame_region(manager.mouse, frame, sprite)
+		replace_action_in_text(action, make_prompt(region, sprite));
+		
+	else:
+		if light_keys:
+			sprite = "keyboard_light"
+		else:
+			sprite = "keyboard_dark"
 	
-		for input in inputs:
-			if input is InputEventKey:
-				var the_key_name = input.as_text().to_lower();
-				
-				if "(physical)" in the_key_name:
-					the_key_name = the_key_name.replace(" (physical)", "");
-				
-				key_name = the_key_name;
-			elif input is InputEventMouseButton:
-				mouse_properties = input;
-		
-		var sprite: String;
-		
-		if mouse_properties != null:
-			if light_keys:
-				sprite = "mouse_light";
-			else:
-				sprite = "mouse_dark";
-			
-			var frame = manager.mouse_button_index_to_name(mouse_properties.button_index).to_lower();
-			var region: Vector2 = get_frame_region(manager.mouse, frame, sprite)
-			replace_action_in_text(action, make_prompt(region, sprite));
-			
-		else:
-			if light_keys:
-				sprite = "keyboard_light"
-			else:
-				sprite = "keyboard_dark"
-		
-			var region: Vector2 = get_frame_region(manager.keyboard, key_name, sprite);
-			replace_action_in_text(action, make_prompt(region, sprite));
+		var region: Vector2 = get_frame_region(manager.keyboard, key_name, sprite);
+		replace_action_in_text(action, make_prompt(region, sprite));
 
-func process_controller_input():
-	for action in actions:
-		var inputs = InputMap.action_get_events(action);
-		
-		var button_properties: InputEventJoypadButton = null;
-		var joystick_properties: InputEventJoypadMotion = null;
-		
-		var has_controller = false;
-		
-		for input in inputs:
-			if input is InputEventJoypadButton:
-				button_properties = input;
-				has_controller = true;
-			elif input is InputEventJoypadMotion:
-				joystick_properties = input;
-				has_controller = true;
-		
-		if has_controller:
-			var texture_name = manager.SUPPORTED_CONTROLLERS.keys()[manager.connected_controller];
-			var frame: String;
-			var region;
-			
-			if joystick_properties != null:
-				if joystick_properties.axis == 0 || joystick_properties.axis == 1:
-					frame = "left-stick";
-				elif joystick_properties.axis == 2 || joystick_properties.axis == 3:
-					frame = "right-stick";
-				elif joystick_properties.axis == 4:
-					frame = "left-trigger";
-				elif joystick_properties.axis == 5:
-					frame = "right-trigger";
-			else:
-				frame = str(button_properties.button_index);
-			
-			region = get_frame_region(manager.buttons, frame, texture_name);
-			replace_action_in_text(action, make_prompt(region, texture_name));
-		else:
-			replace_action_in_text(action, " ")
 
-	#if has_controller:
-		#set_sprite(manager.SUPPORTED_CONTROLLERS.keys()[manager.connected_controller])
-		#
-		#if joystick_properties != null:
-			#if joystick_properties.axis == 0 || joystick_properties.axis == 1:
-				#sprite.frame = manager.buttons["left-stick"];
-			#elif joystick_properties.axis == 2 || joystick_properties.axis == 3:
-				#sprite.frame = manager.buttons["right-stick"];
-			#elif joystick_properties.axis == 4:
-				#sprite.frame = manager.buttons["left-trigger"];
-			#elif joystick_properties.axis == 5:
-				#sprite.frame = manager.buttons["right-trigger"];
-			#return;
-		#
-		#sprite.frame = manager.buttons[str(button_properties.button_index)];
-	pass;
+func _on_controller_input(button_properties, joystick_properties, action_has_controller, action):		
+	if action_has_controller:
+		var texture_name = manager.SUPPORTED_CONTROLLERS.keys()[manager.connected_controller];
+		var frame: String;
+		var region;
+		
+		if joystick_properties != null:
+			if joystick_properties.axis == 0 || joystick_properties.axis == 1:
+				frame = "left-stick";
+			elif joystick_properties.axis == 2 || joystick_properties.axis == 3:
+				frame = "right-stick";
+			elif joystick_properties.axis == 4:
+				frame = "left-trigger";
+			elif joystick_properties.axis == 5:
+				frame = "right-trigger";
+		else:
+			frame = str(button_properties.button_index);
+		
+		if ProjectSettings.get_setting("Addons/ButtonPrompts/prompts/positional_controller_button_prompts") == true:
+			if button_properties.button_index < 4:
+				texture_name = "positional_prompts";
+			else: 
+				texture_name = manager.SUPPORTED_CONTROLLERS.keys()[manager.connected_controller];
+		
+		region = get_frame_region(manager.buttons, frame, texture_name);
+		replace_action_in_text(action, make_prompt(region, texture_name));
+	else:
+		replace_action_in_text(action, " ");
 
 func get_frame_region(input_dictionary, frame_name: String, texture_name: String) -> Vector2:
 	var region: Vector2;

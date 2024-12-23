@@ -18,6 +18,7 @@ var disabled_prompts: Array;
 var maps: Dictionary = {
 	"keyboard_map": preload("res://addons/button_prompts_for_godot/Textures/keyboard_and_mouse/keyboard_mapping.tres"),
 	"mouse_map": preload("res://addons/button_prompts_for_godot/Textures/keyboard_and_mouse/mouse_mapping.tres"),
+	"positional_map": preload("res://addons/button_prompts_for_godot/Textures/controller/positional_prompts_mapping.tres"),
 	"sony_map": preload("res://addons/button_prompts_for_godot/Textures/controller/sony_mapping.tres"),
 	"xbox_map": preload("res://addons/button_prompts_for_godot/Textures/controller/xbox_mapping.tres"),
 	"steam_deck_map": preload("res://addons/button_prompts_for_godot/Textures/controller/steam_deck_mapping.tres"),
@@ -32,6 +33,7 @@ var textures: Dictionary = {
 	"mouse_light": {"Hframes": 3, "Vframes": 3, "image": preload("res://addons/button_prompts_for_godot/Textures/keyboard_and_mouse/mouse_light.png")},
 	"dualsense": {"Hframes": 5, "Vframes": 5, "image": preload("res://addons/button_prompts_for_godot/Textures/controller/dualsense.png")},
 	"xbox_series": {"Hframes": 5, "Vframes": 5, "image": preload("res://addons/button_prompts_for_godot/Textures/controller/xboxSeries.png")},
+	"positional_prompts": {"Hframes": 3, "Vframes": 3, "image": preload("res://addons/button_prompts_for_godot/Textures/controller/positional_prompts.png")}
 }
 
 var unloaded_controller_textures: Dictionary = {
