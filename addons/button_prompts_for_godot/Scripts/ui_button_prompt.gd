@@ -47,9 +47,9 @@ func _input(event):
 
 		using_keyboard = false;
 		restart_text();
-		manager.get_controller_type(Input.get_joy_name(Input.get_connected_joypads().find(event.device)));
 		for action in actions:
-			controller_handler.process_input(action);
+			controller_handler.process_input(action, event.device);
+
 
 func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 	var sprite: String;
@@ -74,9 +74,10 @@ func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 		replace_action_in_text(action, make_prompt(region, sprite));
 
 
-func _on_controller_input(button_properties, joystick_properties, action_has_controller, action):		
+func _on_controller_input(button_properties, joystick_properties, action_has_controller, action, controller_name):		
 	if action_has_controller:
-		var texture_name = manager.SUPPORTED_CONTROLLERS.keys()[manager.connected_controller];
+		var texture_name = manager.SUPPORTED_CONTROLLERS.keys()[manager.get_controller_type(controller_name)];
+
 		var frame: String;
 		var region;
 		
@@ -93,10 +94,10 @@ func _on_controller_input(button_properties, joystick_properties, action_has_con
 			frame = str(button_properties.button_index);
 		
 		if ProjectSettings.get_setting("Addons/ButtonPrompts/prompts/positional_controller_button_prompts") == true:
-			if button_properties.button_index < 4:
+			if button_properties != null && button_properties.button_index < 4:
 				texture_name = "positional_prompts";
 			else: 
-				texture_name = manager.SUPPORTED_CONTROLLERS.keys()[manager.connected_controller];
+				texture_name = manager.SUPPORTED_CONTROLLERS.keys()[manager.get_controller_type(controller_name)];
 		
 		region = get_frame_region(manager.buttons, frame, texture_name);
 		replace_action_in_text(action, make_prompt(region, texture_name));

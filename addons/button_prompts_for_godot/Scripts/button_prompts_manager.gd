@@ -90,45 +90,48 @@ func load_optional_textures():
 			# if not, add to list of disabled prompts
 			disabled_prompts.append(controller);
 
-func get_controller_type(controller_name: String):	
+func update_connected_controller(controller_name: String) -> void:
+	connected_controller = get_controller_type(controller_name);
+
+func get_controller_type(controller_name: String) -> SUPPORTED_CONTROLLERS:	
 	var _name = controller_name.to_lower();
 	
 	if _name.contains("ps3") or _name.contains("dualshock 3"):
 		buttons = maps["sony_map"].map;
-		connected_controller = !disabled_prompts.has("dualshock_3") if SUPPORTED_CONTROLLERS.dualshock_3 else SUPPORTED_CONTROLLERS.dualsense;
+		return !disabled_prompts.has("dualshock_3") if SUPPORTED_CONTROLLERS.dualshock_3 else SUPPORTED_CONTROLLERS.dualsense;
 		;
 	elif _name.contains("ps4") or _name.contains("dualshock 4"):
 		buttons = maps["sony_map"].map;
-		connected_controller = !disabled_prompts.has("dualshock_4") if SUPPORTED_CONTROLLERS.dualshock_4 else SUPPORTED_CONTROLLERS.dualsense;
+		return !disabled_prompts.has("dualshock_4") if SUPPORTED_CONTROLLERS.dualshock_4 else SUPPORTED_CONTROLLERS.dualsense;
 		
 	elif _name.contains("ps5"):
 		buttons = maps["sony_map"].map;
-		connected_controller = SUPPORTED_CONTROLLERS.dualsense;
+		return SUPPORTED_CONTROLLERS.dualsense;
 	
 	elif _name.contains("xbox 360"):
 		buttons = maps["xbox_map"].map;
-		connected_controller = !disabled_prompts.has("xbox_360") if SUPPORTED_CONTROLLERS.xbox_360 else SUPPORTED_CONTROLLERS.xbox_series;
+		return !disabled_prompts.has("xbox_360") if SUPPORTED_CONTROLLERS.xbox_360 else SUPPORTED_CONTROLLERS.xbox_series;
 	
 	elif _name.contains("xbox one"):
 		buttons = maps["xbox_map"].map;
-		connected_controller = !disabled_prompts.has("xbox_one") if SUPPORTED_CONTROLLERS.xbox_one else SUPPORTED_CONTROLLERS.xbox_series;
+		return !disabled_prompts.has("xbox_one") if SUPPORTED_CONTROLLERS.xbox_one else SUPPORTED_CONTROLLERS.xbox_series;
 		
 	elif _name.contains("xbox series") or _name.contains("xinput"):
 		buttons = maps["xbox_map"].map;
-		connected_controller = SUPPORTED_CONTROLLERS.xbox_series;
+		return SUPPORTED_CONTROLLERS.xbox_series;
 	
 	elif _name.contains("steam deck"):
 		buttons = maps["steam_deck_map"].map;
-		connected_controller = !disabled_prompts.has("steam_deck") if SUPPORTED_CONTROLLERS.steam_deck else SUPPORTED_CONTROLLERS.xbox_series;
+		return !disabled_prompts.has("steam_deck") if SUPPORTED_CONTROLLERS.steam_deck else SUPPORTED_CONTROLLERS.xbox_series;
 	
 	elif _name.contains("nintendo switch"):
 		buttons = maps["switch_map"].map;
-		connected_controller = !disabled_prompts.has("nintendo_switch") if SUPPORTED_CONTROLLERS.nintendo_switch else SUPPORTED_CONTROLLERS.xbox_series;
+		return !disabled_prompts.has("nintendo_switch") if SUPPORTED_CONTROLLERS.nintendo_switch else SUPPORTED_CONTROLLERS.xbox_series;
 	
 	else:
 		# if nothing specific, just use xbox series
 		buttons = maps["xbox_map"].map;
-		connected_controller = SUPPORTED_CONTROLLERS.xbox_series;
+		return SUPPORTED_CONTROLLERS.xbox_series;
 
 func mouse_button_index_to_name(button_index: int):
 	match(button_index):

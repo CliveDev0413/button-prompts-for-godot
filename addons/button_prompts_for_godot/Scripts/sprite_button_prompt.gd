@@ -37,8 +37,7 @@ func _input(event) -> void:
 		if !using_keyboard: return;
 
 		using_keyboard = false;
-		manager.get_controller_type(Input.get_joy_name(Input.get_connected_joypads().find(event.device)));
-		controller_handler.process_input(ACTION);
+		controller_handler.process_input(ACTION, event.device);
 
 func _on_keyboard_mouse_input(key_name, mouse_properties, action):	
 	if mouse_properties != null:
@@ -58,9 +57,9 @@ func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 	
 	frame = manager.keyboard[key_name];
 
-func _on_controller_input(button_properties, joystick_properties, action_has_controller, action):
+func _on_controller_input(button_properties, joystick_properties, action_has_controller, action, controller_name):
 	if action_has_controller:
-		set_sprite(manager.SUPPORTED_CONTROLLERS.keys()[manager.connected_controller]);
+		set_sprite(manager.SUPPORTED_CONTROLLERS.keys()[controller_name]);
 		
 		if joystick_properties != null:
 			if joystick_properties.axis == 0 || joystick_properties.axis == 1:
@@ -74,10 +73,10 @@ func _on_controller_input(button_properties, joystick_properties, action_has_con
 			return;
 		
 		if ProjectSettings.get_setting("Addons/ButtonPrompts/prompts/positional_controller_button_prompts") == true:
-			if button_properties.button_index < 4:
+			if button_properties != null && button_properties.button_index < 4:
 				set_sprite("positional_prompts");
 			else: 
-				set_sprite(manager.SUPPORTED_CONTROLLERS.keys()[manager.connected_controller]);
+				set_sprite(manager.SUPPORTED_CONTROLLERS.keys()[manager.get_controller_type(controller_name)]);
 				
 		
 		frame = manager.buttons[str(button_properties.button_index)];

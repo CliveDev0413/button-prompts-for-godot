@@ -1,7 +1,7 @@
 class_name Controller_Input_Handler
 extends Node
 
-signal on_controller_input(button_properties, joystick_properties, action_has_controller, action);
+signal on_controller_input(button_properties, joystick_properties, action_has_controller, action, controller_name);
 
 func detects_input (event) -> bool:
 	if event is InputEventJoypadButton or (event is InputEventJoypadMotion && abs(event.axis_value) > 0.5):        
@@ -9,10 +9,11 @@ func detects_input (event) -> bool:
 	else:
 		return false;
 
-func process_input(action: String) -> void:
+func process_input(action: String, device_id: int) -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN;
 
 	var inputs = InputMap.action_get_events(action);
+	var controller;
 
 	assert(inputs.size() != 0, "The action, " + action + ", has no events. Or the action is non-existent.");
 
@@ -22,6 +23,16 @@ func process_input(action: String) -> void:
 	var has_controller = false;
 
 	for input in inputs:
+		var device_number;
+
+		if input.device < 0: device_number = device_id;
+		else: device_number = input.device;
+
+		controller = Input.get_joy_name(Input.get_connected_joypads().find(device_number));
+		
+		if controller == "":
+			controller = Input.get_joy_name(Input.get_connected_joypads().find(device_id));
+		
 		if input is InputEventJoypadButton:
 			button_properties = input;
 			has_controller = true;
@@ -29,4 +40,4 @@ func process_input(action: String) -> void:
 			joystick_properties = input;
 			has_controller = true;
 
-	on_controller_input.emit(button_properties, joystick_properties, has_controller, action);
+	on_controller_input.emit(button_properties, joystick_properties, has_controller, action, controller);
