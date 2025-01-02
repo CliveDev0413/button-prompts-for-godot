@@ -130,6 +130,10 @@ func cycle_prev_controller() -> void:
 func update_connected_controller(controller_name: String) -> void:
 	connected_controller = get_controller_type(controller_name);
 
+## Checks if the [member light_themed_keyboard_and_mouse] setting is enabled in Project Settings.
+func is_light_keys_enabled() -> bool:
+	return ProjectSettings.get_setting("Addons/ButtonPrompts/prompts/light_themed_keyboard_and_mouse");
+
 ## Checks the connected controller's type based on the controller name. Controller types are from the [member SUPPORTED_CONTROLLERS] enum.
 func get_controller_type(controller_name: String) -> SUPPORTED_CONTROLLERS:	
 	var _name = controller_name.to_lower();

@@ -3,12 +3,11 @@
 
 extends RichTextLabel
 
-var manager : ButtonPromptsManager;
+var manager: ButtonPromptsManager;
 
 @export_range(0, 100) var PROMPT_SCALE: float = 20; ## In percentage of the label's width.
 
 var using_keyboard: bool;
-var light_keys;
 
 var actions: Array;
 var og_text: String;
@@ -25,8 +24,6 @@ func _ready() -> void:
 	if Engine.is_editor_hint(): return;
 	
 	manager = ButtonPromptsManager.Instance;
-	
-	light_keys = ProjectSettings.get_setting("Addons/ButtonPrompts/prompts/light_themed_keyboard_and_mouse");
 
 	actions = get_all_actions_in_text();
 	og_text = text;
@@ -55,7 +52,7 @@ func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 	var sprite: String;
 		
 	if mouse_properties != null:
-		if light_keys:
+		if manager.is_light_keys_enabled():
 			sprite = "mouse_light";
 		else:
 			sprite = "mouse_dark";
@@ -65,7 +62,7 @@ func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 		replace_action_in_text(action, make_prompt(region, sprite));
 		
 	else:
-		if light_keys:
+		if manager.is_light_keys_enabled():
 			sprite = "keyboard_light"
 		else:
 			sprite = "keyboard_dark"

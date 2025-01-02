@@ -8,7 +8,6 @@ var manager: ButtonPromptsManager;
 @export var ACTION = "";
 
 var using_keyboard: bool;
-var light_keys;
 
 var keybord_mouse_handler = Keyboard_Mouse_Input_Handler.new();
 var controller_handler = Controller_Input_Handler.new();
@@ -20,8 +19,6 @@ func _ready() -> void:
 	if Engine.is_editor_hint(): return;
 	
 	manager = ButtonPromptsManager.Instance;
-	
-	light_keys = ProjectSettings.get_setting("Addons/ButtonPrompts/prompts/light_themed_keyboard_and_mouse");
 
 	keybord_mouse_handler.on_keyboard_mouse_input.connect(_on_keyboard_mouse_input);
 	controller_handler.on_controller_input.connect(_on_controller_input);
@@ -41,7 +38,7 @@ func _input(event) -> void:
 func _on_keyboard_mouse_input(key_name, mouse_properties, action):	
 	if mouse_properties != null:
 		
-		if light_keys:
+		if manager.is_light_keys_enabled():
 			set_sprite("mouse_light")
 		else:
 			set_sprite("mouse_dark");
@@ -49,7 +46,7 @@ func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 		frame = manager.mouse[manager.mouse_button_index_to_name(mouse_properties.button_index).to_lower()];
 		return;
 	
-	if light_keys:
+	if manager.is_light_keys_enabled():
 		set_sprite("keyboard_light");
 	else:
 		set_sprite("keyboard_dark");;
