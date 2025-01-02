@@ -3,7 +3,7 @@
 
 extends Sprite2D
 
-var manager;
+var manager: ButtonPromptsManager;
 
 @export var ACTION = "";
 
@@ -19,8 +19,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if Engine.is_editor_hint(): return;
 	
-	assert(has_node("/root/button_prompts_manager"), "The Button Prompts manager could not be found. Please check if the Button Prompts plugin is enabled in Project > Project Settings > Plugins");
-	manager = get_node("/root/button_prompts_manager");
+	manager = ButtonPromptsManager.Instance;
 	
 	light_keys = ProjectSettings.get_setting("Addons/ButtonPrompts/prompts/light_themed_keyboard_and_mouse");
 
@@ -57,9 +56,9 @@ func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 	
 	frame = manager.keyboard[key_name];
 
-func _on_controller_input(button_properties, joystick_properties, action_has_controller, action, controller_name):
+func _on_controller_input(button_properties, joystick_properties, action_has_controller, action, controller_type):
 	if action_has_controller:
-		set_sprite(manager.SUPPORTED_CONTROLLERS.keys()[controller_name]);
+		set_sprite(manager.SUPPORTED_CONTROLLERS.keys()[controller_type]);
 		
 		if joystick_properties != null:
 			if joystick_properties.axis == 0 || joystick_properties.axis == 1:
@@ -76,7 +75,7 @@ func _on_controller_input(button_properties, joystick_properties, action_has_con
 			if button_properties != null && button_properties.button_index < 4:
 				set_sprite("positional_prompts");
 			else: 
-				set_sprite(manager.SUPPORTED_CONTROLLERS.keys()[manager.get_controller_type(controller_name)]);
+				set_sprite(manager.SUPPORTED_CONTROLLERS.keys()[controller_type]);
 				
 		
 		frame = manager.buttons[str(button_properties.button_index)];

@@ -1,7 +1,7 @@
 class_name Controller_Input_Handler
 extends Node
 
-signal on_controller_input(button_properties, joystick_properties, action_has_controller, action, controller_name);
+signal on_controller_input(button_properties, joystick_properties, action_has_controller, action, controller_type);
 
 func detects_input (event) -> bool:
 	if event is InputEventJoypadButton or (event is InputEventJoypadMotion && abs(event.axis_value) > 0.5):        
@@ -23,15 +23,21 @@ func process_input(action: String, device_id: int) -> void:
 	var has_controller = false;
 
 	for input in inputs:
-		var device_number;
+		if ButtonPromptsManager.Instance.auto_switch_prompts:
+			var device_number;
 
-		if input.device < 0: device_number = device_id;
-		else: device_number = input.device;
+			if input.device < 0: device_number = device_id;
+			else: device_number = input.device;
 
-		controller = Input.get_joy_name(Input.get_connected_joypads().find(device_number));
-		
-		if controller == "":
-			controller = Input.get_joy_name(Input.get_connected_joypads().find(device_id));
+			controller = Input.get_joy_name(Input.get_connected_joypads().find(device_number));
+			
+			if controller == "":
+				controller = Input.get_joy_name(Input.get_connected_joypads().find(device_id));
+			
+			controller = ButtonPromptsManager.Instance.get_controller_type(controller);
+			
+		else:
+			controller = ButtonPromptsManager.Instance.connected_controller;
 		
 		if input is InputEventJoypadButton:
 			button_properties = input;
@@ -39,5 +45,7 @@ func process_input(action: String, device_id: int) -> void:
 		elif input is InputEventJoypadMotion:
 			joystick_properties = input;
 			has_controller = true;
+	
+	print(controller);
 
 	on_controller_input.emit(button_properties, joystick_properties, has_controller, action, controller);

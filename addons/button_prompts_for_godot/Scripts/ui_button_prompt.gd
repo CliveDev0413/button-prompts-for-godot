@@ -3,12 +3,13 @@
 
 extends RichTextLabel
 
-var manager;
+var manager : ButtonPromptsManager;
 
 @export_range(0, 100) var PROMPT_SCALE: float = 20; ## In percentage of the label's width.
 
 var using_keyboard: bool;
 var light_keys;
+
 var actions: Array;
 var og_text: String;
 
@@ -23,11 +24,10 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if Engine.is_editor_hint(): return;
 	
-	assert(has_node("/root/button_prompts_manager"), "The Button Prompts manager could not be found. Please check if the Button Prompts plugin is enabled.");
-	manager = get_node("/root/button_prompts_manager");
+	manager = ButtonPromptsManager.Instance;
 	
 	light_keys = ProjectSettings.get_setting("Addons/ButtonPrompts/prompts/light_themed_keyboard_and_mouse");
-	
+
 	actions = get_all_actions_in_text();
 	og_text = text;
 
@@ -74,9 +74,9 @@ func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 		replace_action_in_text(action, make_prompt(region, sprite));
 
 
-func _on_controller_input(button_properties, joystick_properties, action_has_controller, action, controller_name):		
+func _on_controller_input(button_properties, joystick_properties, action_has_controller, action, controller_type):		
 	if action_has_controller:
-		var texture_name = manager.SUPPORTED_CONTROLLERS.keys()[manager.get_controller_type(controller_name)];
+		var texture_name = manager.SUPPORTED_CONTROLLERS.keys()[controller_type];
 
 		var frame: String;
 		var region;
@@ -97,7 +97,7 @@ func _on_controller_input(button_properties, joystick_properties, action_has_con
 			if button_properties != null && button_properties.button_index < 4:
 				texture_name = "positional_prompts";
 			else: 
-				texture_name = manager.SUPPORTED_CONTROLLERS.keys()[manager.get_controller_type(controller_name)];
+				texture_name = manager.SUPPORTED_CONTROLLERS.keys()[controller_type];
 		
 		region = get_frame_region(manager.buttons, frame, texture_name);
 		replace_action_in_text(action, make_prompt(region, texture_name));

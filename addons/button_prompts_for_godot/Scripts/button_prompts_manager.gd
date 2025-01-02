@@ -1,3 +1,4 @@
+class_name ButtonPromptsManager
 extends Node2D
 
 enum SUPPORTED_CONTROLLERS {
@@ -11,9 +12,9 @@ enum SUPPORTED_CONTROLLERS {
 	nintendo_switch
 }
 
-var connected_controller: SUPPORTED_CONTROLLERS;
-
+var connected_controller: SUPPORTED_CONTROLLERS = SUPPORTED_CONTROLLERS.dualsense;
 var disabled_prompts: Array;
+var auto_switch_prompts: bool = true;
 
 var maps: Dictionary = {
 	"keyboard_map": preload("res://addons/button_prompts_for_godot/Textures/keyboard_and_mouse/keyboard_mapping.tres"),
@@ -49,8 +50,12 @@ var keyboard: Dictionary;
 var mouse: Dictionary;
 var buttons: Dictionary;
 
+static var Instance: ButtonPromptsManager;
+
 func _ready() -> void:	
-	load_optional_textures();
+	_load_optional_textures();
+
+	Instance = self;
 	
 	keyboard = maps["keyboard_map"].map;
 	mouse = maps["mouse_map"].map;
@@ -69,7 +74,7 @@ func _ready() -> void:
 	#
 	#print("conversion complete.");
 
-func load_optional_textures():	
+func _load_optional_textures() -> void:	
 	for controller in SUPPORTED_CONTROLLERS:	
 		var setting_value = ProjectSettings.get_setting("Addons/ButtonPrompts/optional_supported_controllers/" + str(controller));
 		
@@ -90,9 +95,42 @@ func load_optional_textures():
 			# if not, add to list of disabled prompts
 			disabled_prompts.append(controller);
 
+## Forces all Button Prompts present in the scene to use the prompts of the given controller type. Make [member auto_switch_prompts] true for auto-switching again.
+func force_set_controller_prompts(controller_type: SUPPORTED_CONTROLLERS) -> void:
+	auto_switch_prompts = false;
+
+	connected_controller = controller_type;
+
+## Forces all Button Prompts present in the scene to use the prompts of the next controller in the [member SUPPORTED_CONTROLLERS] list. Make [member auto_switch_prompts] true for auto-switching again.
+func cycle_next_controller() -> void:
+	auto_switch_prompts = false;
+	var next_controller: int = connected_controller + 1;
+
+	if next_controller >= SUPPORTED_CONTROLLERS.keys().size():
+		next_controller = 0;
+
+	connected_controller = SUPPORTED_CONTROLLERS[SUPPORTED_CONTROLLERS.keys()[next_controller]];
+
+	print(connected_controller);
+	pass;
+
+## Forces all Button Prompts present in the scene to use the prompts of the previous controller in the [member SUPPORTED_CONTROLLERS] list. Make [member auto_switch_prompts] true for auto-switching again.
+func cycle_prev_controller() -> void:
+	auto_switch_prompts = false;
+	var next_controller: int = connected_controller - 1;
+
+	if next_controller < 0:
+		next_controller = SUPPORTED_CONTROLLERS.keys().size() - 1;
+
+	connected_controller = SUPPORTED_CONTROLLERS[SUPPORTED_CONTROLLERS.keys()[next_controller]];
+
+	print(connected_controller);
+	pass;
+
 func update_connected_controller(controller_name: String) -> void:
 	connected_controller = get_controller_type(controller_name);
 
+## Checks the connected controller's type based on the controller name. Controller types are from the [member SUPPORTED_CONTROLLERS] enum.
 func get_controller_type(controller_name: String) -> SUPPORTED_CONTROLLERS:	
 	var _name = controller_name.to_lower();
 	
@@ -133,7 +171,8 @@ func get_controller_type(controller_name: String) -> SUPPORTED_CONTROLLERS:
 		buttons = maps["xbox_map"].map;
 		return SUPPORTED_CONTROLLERS.xbox_series;
 
-func mouse_button_index_to_name(button_index: int):
+## Returns an understandable mouse input text based on the button index. Example: button index 1 is "MOUSE_BUTTON_LEFT".
+func mouse_button_index_to_name(button_index: int) -> String:
 	match(button_index):
 		1:
 			return "MOUSE_BUTTON_LEFT";

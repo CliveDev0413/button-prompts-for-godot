@@ -41,6 +41,14 @@ func _enter_tree() -> void:
 		"usage": PROPERTY_USAGE_DEFAULT,
 		"default_value": true,
 	});
+
+	add_setting({
+		"name": category + "/optional_supported_controllers/xbox_one",
+		"type": TYPE_BOOL,
+		"hint": PROPERTY_HINT_NONE,
+		"usage": PROPERTY_USAGE_DEFAULT,
+		"default_value": true,
+	});
 	
 	add_setting({
 		"name": category + "/optional_supported_controllers/xbox_360",
