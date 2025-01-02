@@ -3,11 +3,12 @@
 
 extends Sprite2D
 
-var manager: ButtonPromptsManager;
+var manager: Editor_ButtonPromptsManager;
 
 @export var ACTION = "";
 
 var using_keyboard: bool;
+var last_controller_event_device_id: int;
 
 var keybord_mouse_handler = Keyboard_Mouse_Input_Handler.new();
 var controller_handler = Controller_Input_Handler.new();
@@ -18,10 +19,11 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if Engine.is_editor_hint(): return;
 	
-	manager = ButtonPromptsManager.Instance;
+	manager = Editor_ButtonPromptsManager.Instance;
 
 	keybord_mouse_handler.on_keyboard_mouse_input.connect(_on_keyboard_mouse_input);
 	controller_handler.on_controller_input.connect(_on_controller_input);
+	manager.on_switch_controller.connect(_on_switch_controller);
 
 func _input(event) -> void:
 	if keybord_mouse_handler.detects_input(event):
@@ -33,9 +35,10 @@ func _input(event) -> void:
 		if !using_keyboard: return;
 
 		using_keyboard = false;
+		last_controller_event_device_id = event.device;
 		controller_handler.process_input(ACTION, event.device);
 
-func _on_keyboard_mouse_input(key_name, mouse_properties, action):	
+func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 	if mouse_properties != null:
 		
 		if manager.is_light_keys_enabled():
@@ -76,6 +79,9 @@ func _on_controller_input(button_properties, joystick_properties, action_has_con
 				
 		
 		frame = manager.buttons[str(button_properties.button_index)];
+
+func _on_switch_controller(prev_prompt, new_prompt):
+	controller_handler.process_input(ACTION, last_controller_event_device_id);
 
 func set_sprite(texture_name: String) -> void:
 	var prompt_texture = manager.textures[texture_name];

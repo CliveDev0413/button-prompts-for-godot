@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi0xbjfiw4r85"]
+[gd_scene load_steps=7 format=3 uid="uid://bi0xbjfiw4r85"]
 
 [ext_resource type="Texture2D" uid="uid://dlsjm1yyq3uac" path="res://addons/button_prompts_for_godot/Demo Scene/ground.png" id="1_p4eo6"]
 [ext_resource type="Script" path="res://addons/button_prompts_for_godot/Scripts/ui_button_prompt.gd" id="1_w5gpe"]
 [ext_resource type="PackedScene" uid="uid://r1ina21dlnd1" path="res://addons/button_prompts_for_godot/Demo Scene/Player/demo_player.tscn" id="2_e1vfc"]
+[ext_resource type="Texture2D" uid="uid://bbca1h0o1n8ir" path="res://addons/button_prompts_for_godot/Textures/key_blank.png" id="4_p1ghx"]
+[ext_resource type="Script" path="res://addons/button_prompts_for_godot/Scripts/sprite_button_prompt.gd" id="5_y54a4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iiyoc"]
 size = Vector2(578, 259)
@@ -49,3 +51,10 @@ texture = ExtResource("1_p4eo6")
 shape = SubResource("RectangleShape2D_iiyoc")
 
 [node name="Demo Player" parent="." instance=ExtResource("2_e1vfc")]
+
+[node name="ButtonPromptSprite" type="Sprite2D" parent="."]
+position = Vector2(47, -22)
+scale = Vector2(0.26, 0.26)
+texture = ExtResource("4_p1ghx")
+script = ExtResource("5_y54a4")
+ACTION = "player1_shoot"

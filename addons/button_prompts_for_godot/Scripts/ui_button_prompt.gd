@@ -3,11 +3,12 @@
 
 extends RichTextLabel
 
-var manager: ButtonPromptsManager;
+var manager: Editor_ButtonPromptsManager;
 
 @export_range(0, 100) var PROMPT_SCALE: float = 20; ## In percentage of the label's width.
 
 var using_keyboard: bool;
+var last_controller_event_device_id: int;
 
 var actions: Array;
 var og_text: String;
@@ -23,15 +24,16 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if Engine.is_editor_hint(): return;
 	
-	manager = ButtonPromptsManager.Instance;
+	manager = Editor_ButtonPromptsManager.Instance;
 
 	actions = get_all_actions_in_text();
 	og_text = text;
 
 	keybord_mouse_handler.on_keyboard_mouse_input.connect(_on_keyboard_mouse_input);
 	controller_handler.on_controller_input.connect(_on_controller_input);
+	manager.on_switch_controller.connect(_on_switch_controller);
 
-func _input(event):	
+func _input(event) -> void:	
 	if keybord_mouse_handler.detects_input(event):
 		if using_keyboard: return;
 
@@ -44,9 +46,9 @@ func _input(event):
 
 		using_keyboard = false;
 		restart_text();
+		last_controller_event_device_id = event.device;
 		for action in actions:
 			controller_handler.process_input(action, event.device);
-
 
 func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 	var sprite: String;
@@ -69,7 +71,6 @@ func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 	
 		var region: Vector2 = get_frame_region(manager.keyboard, key_name, sprite);
 		replace_action_in_text(action, make_prompt(region, sprite));
-
 
 func _on_controller_input(button_properties, joystick_properties, action_has_controller, action, controller_type):		
 	if action_has_controller:
@@ -100,6 +101,11 @@ func _on_controller_input(button_properties, joystick_properties, action_has_con
 		replace_action_in_text(action, make_prompt(region, texture_name));
 	else:
 		replace_action_in_text(action, " ");
+
+func _on_switch_controller(prev_prompt, new_prompt):
+	restart_text();
+	for action in actions:
+		controller_handler.process_input(action, last_controller_event_device_id);
 
 func get_frame_region(input_dictionary, frame_name: String, texture_name: String) -> Vector2:
 	var region: Vector2;

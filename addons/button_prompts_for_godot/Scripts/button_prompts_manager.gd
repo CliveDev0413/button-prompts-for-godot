@@ -1,4 +1,4 @@
-class_name ButtonPromptsManager
+class_name Editor_ButtonPromptsManager
 extends Node2D
 
 enum SUPPORTED_CONTROLLERS {
@@ -15,6 +15,8 @@ enum SUPPORTED_CONTROLLERS {
 var connected_controller: SUPPORTED_CONTROLLERS = SUPPORTED_CONTROLLERS.dualsense;
 var disabled_prompts: Array;
 var auto_switch_prompts: bool = true;
+
+signal on_switch_controller(prev_prompt: SUPPORTED_CONTROLLERS, new_prompt: SUPPORTED_CONTROLLERS);
 
 var maps: Dictionary = {
 	"keyboard_map": preload("res://addons/button_prompts_for_godot/Textures/keyboard_and_mouse/keyboard_mapping.tres"),
@@ -50,7 +52,7 @@ var keyboard: Dictionary;
 var mouse: Dictionary;
 var buttons: Dictionary;
 
-static var Instance: ButtonPromptsManager;
+static var Instance: Editor_ButtonPromptsManager;
 
 func _ready() -> void:	
 	_load_optional_textures();
@@ -59,6 +61,10 @@ func _ready() -> void:
 	
 	keyboard = maps["keyboard_map"].map;
 	mouse = maps["mouse_map"].map;
+
+# func _process(delta: float) -> void:
+# 	if Input.is_action_just_pressed("player1_jump"):
+# 		cycle_next_controller();
 
 # donut delete
 #func jsons_to_resources() -> void:
@@ -99,11 +105,15 @@ func _load_optional_textures() -> void:
 func force_set_controller_prompts(controller_type: SUPPORTED_CONTROLLERS) -> void:
 	auto_switch_prompts = false;
 
+	var prev_prompt = connected_controller;
 	connected_controller = controller_type;
+
+	on_switch_controller.emit(prev_prompt, controller_type);
 
 ## Forces all Button Prompts present in the scene to use the prompts of the next controller in the [member SUPPORTED_CONTROLLERS] list. Make [member auto_switch_prompts] true for auto-switching again.
 func cycle_next_controller() -> void:
 	auto_switch_prompts = false;
+	var prev_prompt = connected_controller;
 	var next_controller: int = connected_controller + 1;
 
 	if next_controller >= SUPPORTED_CONTROLLERS.keys().size():
@@ -111,12 +121,12 @@ func cycle_next_controller() -> void:
 
 	connected_controller = SUPPORTED_CONTROLLERS[SUPPORTED_CONTROLLERS.keys()[next_controller]];
 
-	print(connected_controller);
-	pass;
+	on_switch_controller.emit(prev_prompt, connected_controller);
 
 ## Forces all Button Prompts present in the scene to use the prompts of the previous controller in the [member SUPPORTED_CONTROLLERS] list. Make [member auto_switch_prompts] true for auto-switching again.
 func cycle_prev_controller() -> void:
 	auto_switch_prompts = false;
+	var prev_prompt = connected_controller;
 	var next_controller: int = connected_controller - 1;
 
 	if next_controller < 0:
@@ -124,8 +134,7 @@ func cycle_prev_controller() -> void:
 
 	connected_controller = SUPPORTED_CONTROLLERS[SUPPORTED_CONTROLLERS.keys()[next_controller]];
 
-	print(connected_controller);
-	pass;
+	on_switch_controller.emit(prev_prompt, connected_controller);
 
 func update_connected_controller(controller_name: String) -> void:
 	connected_controller = get_controller_type(controller_name);
