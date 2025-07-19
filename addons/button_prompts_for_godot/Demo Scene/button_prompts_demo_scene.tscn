@@ -10,6 +10,7 @@
 size = Vector2(578, 259)
 
 [node name="Button Prompts Demo Scene" type="Node2D"]
+position = Vector2(38, 38)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
