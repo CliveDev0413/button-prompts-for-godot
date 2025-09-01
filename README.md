@@ -1,4 +1,4 @@
-# Button Prompts For Godot, by Clive Dev
+![Banner]("/.github/banner.png")
 A simple way to always display the right button prompts
 
 
@@ -119,4 +119,4 @@ This asset and it's code are under the [MIT License](LICENSE.md). Feel free to c
 
 
 # That's it
-For any questions, concerns, or bug findings; you may post them on this asset's Itch.io page. Feedback is very much appreciated. Thank you so much for checking out this asset! 
+For any questions, concerns, or bug findings; you may post them on this asset's [Itch.io page](https://clivedev.itch.io/button-prompts-for-godot). Feedback is very much appreciated. Thank you so much for checking out this asset! 
