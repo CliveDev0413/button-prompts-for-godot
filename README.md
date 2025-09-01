@@ -9,7 +9,7 @@ A simple way to always display the right button prompts
 
 Button prompts are often an underlooked aspect when making a video game, but it is seriously--in my opinion-- a *crucial* part of teaching players how to play your game and what it's mechanics are. So this asset aims to provide developers a way to overcome that aspect without the hassles that come with it; like taking account the many different controller icons, and automatically switching the showed icon depending on the controller used.
 
-[![Ko-fi button](https://storage.ko-fi.com/cdn/kofi6.png)](https://ko-fi.com/Y8Y34J06Q)
+<a href='https://ko-fi.com/Y8Y34J06Q' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 # Features
 - **Prompts switch automatically.** From keyboard and mouse, to controller, and to other controllers!
@@ -77,23 +77,25 @@ Instead of showing specific symbols like a, and b; or cross, and circle; you can
 
 3. **Optional Supported Controllers**
 
-This setting allows you to **preload only specific controller icons**. This can be useful if you want to not-load specific controller icons that you know your player base won't use anyways, like the PS3 icons.
+This setting allows you to **preload only specific controller icons**. This can be useful if you want to not-load specific controller icons that you know your player base won't use anyways, maybe like the PS3 icons.
 
 
 ### Helpful Functions
 These functions are accesible through `ButtonPromptsManager.Instance`.
 
 1. `force_set_controller_prompts(controller_type)`
+
 You can use this to force-display a specific controller's icons only. It takes in a parameter of `ButtonPromptsManager.SUPPORTED_CONTROLLERS`, which you can get from `ButtonPromptsManager.Instance`.
 
 2. `cycle_prev_controller()` & `cycle_next_controller()`   
+
 If you forced a specific controller using the last mentioned function, you can use these functions to cycle through the list of supported controllers and update the prompt icons without having to make your own cycling logic. 
 
 You may want this in your settings where there are some arrows that call `cycle_prev_controller()` & `cycle_next_controller()` to change the controller icons. Like "choose your controller's icons" or something. 
 
 
 # Planned Features
-These are some ideas that I would like to implement in the future (if I have the time):
+These are some ideas that I would like to implement in the future--if I have the time!
 1. Animated Prompts
 2. Customizable Icon Textures/Spritsheeet
 3. Show Direction of Joystick Movement
@@ -107,4 +109,4 @@ This asset and it's code are under the [MIT License](LICENSE.md). Feel free to c
 
 
 # That's it
-For any questions, concerns, or bug findings; you may post them on this asset's Itch.io page. Feedback is very much appreciated. Thank you for checking out this asset! 
+For any questions, concerns, or bug findings; you may post them on this asset's Itch.io page. Feedback is very much appreciated. Thank you so much for checking out this asset! 
