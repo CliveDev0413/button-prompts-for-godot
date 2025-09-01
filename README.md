@@ -12,10 +12,10 @@ Button prompts are often an underlooked aspect when making a video game, but it 
 <a href='https://ko-fi.com/Y8Y34J06Q' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 # Features
-- **Prompts switch automatically.** From keyboard and mouse, to controller, and to other controllers!
-- **Supports up to 8 different controller icons!** That's definitely enough.
-- **Easy to implement.** It's just nodes you add to your scene.
-- **Light on performance.** Little to no performance effects.
+- **🔁 Prompts switch automatically.** From keyboard and mouse, to controller, and to other controllers!
+- **🎮 Supports up to 8 different controller icons!** That's definitely enough.
+- **🔨 Easy to implement.** It's just nodes you add to your scene.
+- **📄 Light on performance.** Little to no performance effects.
 
 # Currently supported controller icons:
 - PS5/Dualsense
