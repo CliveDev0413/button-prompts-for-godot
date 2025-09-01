@@ -15,7 +15,7 @@ Button prompts are often an underlooked aspect when making a video game, but it 
 - **🔁 Prompts switch automatically.** From keyboard and mouse, to controller, and to other controllers!
 - **🎮 Supports up to 8 different controller icons!** That's definitely enough.
 - **🔨 Easy to implement.** It's just nodes you add to your scene.
-- **📄 Light on performance.** Little to no performance effects.
+- **✅ Light on performance.** Little to no performance effects.
 
 # Currently supported controller icons:
 - PS5/Dualsense
@@ -63,7 +63,7 @@ You can change the size of the prompts by adjusting the `Prompt Scale` variable.
 
 Example: "Press {ui_up} to change selection, then {ui_select} to confirm your choice."
 
-### Settings
+## Settings
 
 In *Project > Project Settings > General* under the `Addons` category, you will see the settings for the Button Prompts addon. If you don't see it, you can type "button prompts" in the filter settings search bar. Here's what they do:
 
@@ -80,7 +80,7 @@ Instead of showing specific symbols like a, and b; or cross, and circle; you can
 This setting allows you to **preload only specific controller icons**. This can be useful if you want to not-load specific controller icons that you know your player base won't use anyways, maybe like the PS3 icons.
 
 
-### Helpful Functions
+## Helpful Functions
 These functions are accesible through `ButtonPromptsManager.Instance`.
 
 1. `force_set_controller_prompts(controller_type)`
