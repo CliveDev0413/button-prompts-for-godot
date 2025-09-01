@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bi0xbjfiw4r85"]
+[gd_scene load_steps=8 format=3 uid="uid://bi0xbjfiw4r85"]
 
 [ext_resource type="Texture2D" uid="uid://dlsjm1yyq3uac" path="res://addons/button_prompts_for_godot/Demo Scene/ground.png" id="1_p4eo6"]
 [ext_resource type="Script" path="res://addons/button_prompts_for_godot/Scripts/ui_button_prompt.gd" id="1_w5gpe"]
+[ext_resource type="Script" path="res://addons/button_prompts_for_godot/Demo Scene/display_controller_name.gd" id="2_420as"]
 [ext_resource type="PackedScene" uid="uid://r1ina21dlnd1" path="res://addons/button_prompts_for_godot/Demo Scene/Player/demo_player.tscn" id="2_e1vfc"]
 [ext_resource type="Texture2D" uid="uid://bbca1h0o1n8ir" path="res://addons/button_prompts_for_godot/Textures/key_blank.png" id="4_p1ghx"]
 [ext_resource type="Script" path="res://addons/button_prompts_for_godot/Scripts/sprite_button_prompt.gd" id="5_y54a4"]
@@ -39,6 +40,15 @@ fit_content = true
 scroll_active = false
 script = ExtResource("1_w5gpe")
 PROMPT_SCALE = 10.0
+
+[node name="Controller Name" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_left = 31.0
+offset_top = 42.0
+offset_right = 1114.0
+offset_bottom = 635.0
+text = "sdfsdf"
+script = ExtResource("2_420as")
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(14, 141)

@@ -149,11 +149,11 @@ func get_controller_type(controller_name: String) -> SUPPORTED_CONTROLLERS:
 	
 	if _name.contains("ps3") or _name.contains("dualshock 3"):
 		buttons = maps["sony_map"].map;
-		return !disabled_prompts.has("dualshock_3") if SUPPORTED_CONTROLLERS.dualshock_3 else SUPPORTED_CONTROLLERS.dualsense;
-		;
+		return SUPPORTED_CONTROLLERS.dualshock_3 if !disabled_prompts.has("dualshock_3") else SUPPORTED_CONTROLLERS.dualsense;
+		
 	elif _name.contains("ps4") or _name.contains("dualshock 4"):
 		buttons = maps["sony_map"].map;
-		return !disabled_prompts.has("dualshock_4") if SUPPORTED_CONTROLLERS.dualshock_4 else SUPPORTED_CONTROLLERS.dualsense;
+		return SUPPORTED_CONTROLLERS.dualshock_4 if !disabled_prompts.has("dualshock_4") else SUPPORTED_CONTROLLERS.dualsense;
 		
 	elif _name.contains("ps5"):
 		buttons = maps["sony_map"].map;
@@ -161,23 +161,23 @@ func get_controller_type(controller_name: String) -> SUPPORTED_CONTROLLERS:
 	
 	elif _name.contains("xbox 360"):
 		buttons = maps["xbox_map"].map;
-		return !disabled_prompts.has("xbox_360") if SUPPORTED_CONTROLLERS.xbox_360 else SUPPORTED_CONTROLLERS.xbox_series;
+		return SUPPORTED_CONTROLLERS.xbox_360 if !disabled_prompts.has("xbox_360") else SUPPORTED_CONTROLLERS.xbox_series;
 	
 	elif _name.contains("xbox one"):
 		buttons = maps["xbox_map"].map;
-		return !disabled_prompts.has("xbox_one") if SUPPORTED_CONTROLLERS.xbox_one else SUPPORTED_CONTROLLERS.xbox_series;
+		return SUPPORTED_CONTROLLERS.xbox_one if !disabled_prompts.has("xbox_one") else SUPPORTED_CONTROLLERS.xbox_series;
 		
 	elif _name.contains("xbox series") or _name.contains("xinput"):
 		buttons = maps["xbox_map"].map;
 		return SUPPORTED_CONTROLLERS.xbox_series;
 	
-	elif _name.contains("steam deck"):
+	elif _name.contains("steam virtual gamepad") or _name.contains("steam"):
 		buttons = maps["steam_deck_map"].map;
-		return !disabled_prompts.has("steam_deck") if SUPPORTED_CONTROLLERS.steam_deck else SUPPORTED_CONTROLLERS.xbox_series;
+		return SUPPORTED_CONTROLLERS.steam_deck if !disabled_prompts.has("steam_deck") else SUPPORTED_CONTROLLERS.xbox_series;
 	
 	elif _name.contains("nintendo switch"):
 		buttons = maps["switch_map"].map;
-		return !disabled_prompts.has("nintendo_switch") if SUPPORTED_CONTROLLERS.nintendo_switch else SUPPORTED_CONTROLLERS.xbox_series;
+		return SUPPORTED_CONTROLLERS.nintendo_switch if !disabled_prompts.has("nintendo_switch") else SUPPORTED_CONTROLLERS.xbox_series;
 	
 	else:
 		# if nothing specific, just use xbox series

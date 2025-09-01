@@ -29,12 +29,12 @@ func process_input(action: String, device_id: int) -> void:
 			if input.device < 0: device_number = device_id;
 			else: device_number = input.device;
 
-			controller = Input.get_joy_name(Input.get_connected_joypads().find(device_number));
+			var controller_name = Input.get_joy_name(Input.get_connected_joypads().find(device_number));
 			
-			if controller == "":
-				controller = Input.get_joy_name(Input.get_connected_joypads().find(device_id));
+			if controller_name == "":
+				controller_name = Input.get_joy_name(Input.get_connected_joypads().find(device_id));
 			
-			controller = Editor_ButtonPromptsManager.Instance.get_controller_type(controller);
+			controller = Editor_ButtonPromptsManager.Instance.get_controller_type(controller_name);
 			
 		else:
 			controller = Editor_ButtonPromptsManager.Instance.connected_controller;
