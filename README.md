@@ -2,10 +2,10 @@
 A simple way to always display the right button prompts
 
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE.md)
 ![Supported Godot Version](https://img.shields.io/badge/Godot-4.x-blue)
 
-<p align="center"><img src="/.github/demonstration.gif" alt="button-prompt-showcase" width="600px" height="338px"></p>
+<img src="/.github/demonstration.gif" alt="button-prompt-showcase" width="600px" height="338px">
 
 ---
 
@@ -29,7 +29,9 @@ Button prompts are often an underlooked aspect when making a video game, but it 
 - PS3/Dualshock 3
 - Xbox 360
 
-<p align="center"><img src="/.github/steam_deck.gif" alt="button-prompt-showcase" width="600px" height="338px"></p>
+<img src="/.github/steam_deck.gif" alt="button-prompt-showcase" width="600px" height="338px">
+
+*Works on my Steam Deck!*
 
 For controllers not on the list, it defaults to Xbox icons because that's what's usually, universally used.
 
