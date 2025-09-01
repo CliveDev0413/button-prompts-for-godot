@@ -63,6 +63,7 @@ Set the `Action` variable in it's properties to the **input map action** that yo
 
 Example Action: `ui_up`
 
+![Sprite Example](.github/sprite_example.png);
 
 ### 2. ![ButtonPromptLabel](./addons/button_prompts_for_godot/Icons/ui_button_prompt_icon.svg) ButtonPromptLabel
 This node is a RichTextLabel node that can display one or multiple button prompts **in-between text**. This is good for when you want to **show one or more prompts with text around it**.
@@ -73,9 +74,15 @@ You can change the size of the prompts by adjusting the `Prompt Scale` variable.
 
 Example: "Press {ui_up} to change selection, then {ui_select} to confirm your choice."
 
+![Label Example](.github/label_example.png);
+
 ## Settings
 
-In *Project > Project Settings > General* under the `Addons` category, you will see the settings for the Button Prompts addon. If you don't see it, you can type "button prompts" in the filter settings search bar. Here's what they do:
+In *Project > Project Settings > General* under the `Addons` category, you will see the settings for the Button Prompts addon. If you don't see it, you can type "button prompts" in the filter settings search bar. 
+
+![Settings Example](.github/settings_example.png);
+
+Here's what they do:
 
 1. **Light Themed Keyboard and Mouse**
 
