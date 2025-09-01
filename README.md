@@ -19,8 +19,6 @@ Button prompts are often an underlooked aspect when making a video game, but it 
 - **🔨 Easy to implement.** It's just nodes you add to your scene.
 - **✅ Light on performance.** Little to no performance effects.
 
-<p align="center"><img src="/.github/steam_deck.gif" alt="button-prompt-showcase" width="600px" height="338px"></p>
-
 # Currently supported controller icons:
 - PS5/Dualsense
 - Xbox Series
@@ -30,6 +28,8 @@ Button prompts are often an underlooked aspect when making a video game, but it 
 - Xbox One
 - PS3/Dualshock 3
 - Xbox 360
+
+<p align="center"><img src="/.github/steam_deck.gif" alt="button-prompt-showcase" width="600px" height="338px"></p>
 
 For controllers not on the list, it defaults to Xbox icons because that's what's usually, universally used.
 
