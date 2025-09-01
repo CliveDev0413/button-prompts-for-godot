@@ -5,6 +5,8 @@ A simple way to always display the right button prompts
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 ![Supported Godot Version](https://img.shields.io/badge/Godot-4.x-blue)
 
+<p align="center"><img src="/.github/demonstration.gif" alt="button-prompt-showcase" width="600px" height="338px"></p>
+
 ---
 
 Button prompts are often an underlooked aspect when making a video game, but it is seriously--in my opinion-- a *crucial* part of teaching players how to play your game and what it's mechanics are. So this asset aims to provide developers a way to overcome that aspect without the hassles that come with it; like taking account the many different controller icons, and automatically switching the showed icon depending on the controller used.
@@ -16,6 +18,8 @@ Button prompts are often an underlooked aspect when making a video game, but it 
 - **🎮 Supports up to 8 different controller icons!** That's definitely enough.
 - **🔨 Easy to implement.** It's just nodes you add to your scene.
 - **✅ Light on performance.** Little to no performance effects.
+
+<p align="center"><img src="/.github/steam_deck.gif" alt="button-prompt-showcase" width="600px" height="338px"></p>
 
 # Currently supported controller icons:
 - PS5/Dualsense
@@ -42,7 +46,11 @@ And also thanks to [this video](https://youtu.be/d6GtGbI-now) for inspiring this
 
 
 # Getting Started
-Add a new node to your scene, search for "ButtonPrompt", then select the one that suits your usage. Heres a brief explanation of the two:
+Add a new node to your scene, search for "ButtonPrompt", then select the one that suits your usage.
+
+Alternatively, you can open the demo scene and mess around. (addons > button_prompts_for_godot > Demo Scene)
+
+Heres a brief explanation of the two nodes:
 
 > Note: The prompt nodes will only get the first button assigned to the specified `action` from your action map. That means, if you have multiple buttons assigned to an action, like joystick up and d-pad up, whatevers above will be shown on the prompt.
 
