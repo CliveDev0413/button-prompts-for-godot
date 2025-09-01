@@ -1,4 +1,4 @@
-class_name Editor_ButtonPromptsManager
+class_name ButtonPromptsManager
 extends Node2D
 
 enum SUPPORTED_CONTROLLERS {
@@ -52,7 +52,7 @@ var keyboard: Dictionary;
 var mouse: Dictionary;
 var buttons: Dictionary;
 
-static var Instance: Editor_ButtonPromptsManager;
+static var Instance: ButtonPromptsManager;
 
 func _ready() -> void:	
 	_load_optional_textures();

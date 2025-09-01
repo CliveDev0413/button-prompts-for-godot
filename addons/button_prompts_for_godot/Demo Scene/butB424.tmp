@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://bi0xbjfiw4r85"]
+
+[ext_resource type="Texture2D" uid="uid://dlsjm1yyq3uac" path="res://addons/button_prompts_for_godot/Demo Scene/ground.png" id="1_p4eo6"]
+[ext_resource type="Script" path="res://addons/button_prompts_for_godot/Scripts/ui_button_prompt.gd" id="1_w5gpe"]
+[ext_resource type="Script" path="res://addons/button_prompts_for_godot/Demo Scene/display_controller_name.gd" id="2_420as"]
+[ext_resource type="PackedScene" uid="uid://r1ina21dlnd1" path="res://addons/button_prompts_for_godot/Demo Scene/Player/demo_player.tscn" id="2_e1vfc"]
+[ext_resource type="Texture2D" uid="uid://bbca1h0o1n8ir" path="res://addons/button_prompts_for_godot/Textures/key_blank.png" id="4_p1ghx"]
+[ext_resource type="Script" path="res://addons/button_prompts_for_godot/Scripts/sprite_button_prompt.gd" id="5_y54a4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iiyoc"]
+size = Vector2(578, 259)
+
+[node name="Button Prompts Demo Scene" type="Node2D"]
+position = Vector2(38, 38)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonPromptLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -107.0
+offset_right = 724.0
+offset_bottom = -18.0
+grow_vertical = 0
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "Player one: {player1_jump}, and {player1_shoot}
+Player two: {player2_jump}, and {player2_shoot}"
+fit_content = true
+scroll_active = false
+script = ExtResource("1_w5gpe")
+PROMPT_SCALE = 10.0
+
+[node name="Controller Name" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_left = 31.0
+offset_top = 42.0
+offset_right = 1114.0
+offset_bottom = 635.0
+text = "sdfsdf"
+script = ExtResource("2_420as")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(14, 141)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+scale = Vector2(4.51563, 4.04688)
+texture = ExtResource("1_p4eo6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_iiyoc")
+
+[node name="Demo Player" parent="." instance=ExtResource("2_e1vfc")]
+
+[node name="ButtonPromptSprite" type="Sprite2D" parent="."]
+position = Vector2(47, -22)
+scale = Vector2(0.26, 0.26)
+texture = ExtResource("4_p1ghx")
+script = ExtResource("5_y54a4")
+ACTION = "player1_shoot"

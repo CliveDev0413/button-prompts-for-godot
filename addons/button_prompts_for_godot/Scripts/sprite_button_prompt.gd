@@ -2,8 +2,10 @@
 @icon("res://addons/button_prompts_for_godot/Icons/sprite_button_prompt_icon.svg")
 
 extends Sprite2D
+## Displays a button prompt icon.
+class_name ButtonPromptSprite
 
-var manager: Editor_ButtonPromptsManager;
+var manager: ButtonPromptsManager;
 
 @export var ACTION = "";
 
@@ -19,7 +21,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if Engine.is_editor_hint(): return;
 	
-	manager = Editor_ButtonPromptsManager.Instance;
+	manager = ButtonPromptsManager.Instance;
 
 	keybord_mouse_handler.on_keyboard_mouse_input.connect(_on_keyboard_mouse_input);
 	controller_handler.on_controller_input.connect(_on_controller_input);

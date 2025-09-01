@@ -1,9 +1,12 @@
 @tool
 @icon("res://addons/button_prompts_for_godot/Icons/ui_button_prompt_icon.svg")
 
-extends RichTextLabel
 
-var manager: Editor_ButtonPromptsManager;
+extends RichTextLabel
+## Displays button prompt icons in-between text. Use curly braces -- like this: {action_name} -- to insert a prompt.
+class_name ButtonPromptLabel
+
+var manager: ButtonPromptsManager;
 
 @export_range(0, 100) var PROMPT_SCALE: float = 20; ## In percentage of the label's width.
 
@@ -24,7 +27,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	if Engine.is_editor_hint(): return;
 	
-	manager = Editor_ButtonPromptsManager.Instance;
+	manager = ButtonPromptsManager.Instance;
 
 	actions = get_all_actions_in_text();
 	og_text = text;

@@ -7,4 +7,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _input(event) -> void:
-	text = "Connected controller: " + Input.get_joy_name(0) + ". Loaded Texture: " + str(Editor_ButtonPromptsManager.Instance.textures);
+	text = "Connected controller: " + Input.get_joy_name(0) + ". Loaded Texture: " + str(ButtonPromptsManager.Instance.textures);
