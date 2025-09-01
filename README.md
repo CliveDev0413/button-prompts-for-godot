@@ -42,44 +42,48 @@ And also thanks to [this video](https://youtu.be/d6GtGbI-now) for inspiring this
 
 
 # Getting Started
-Add a new node to your scene, search for "ButtonPrompt", select the one that suits your usage.
+Add a new node to your scene, search for "ButtonPrompt", select the one that suits your usage. Heres a brief explanation of the two:
 
 ### 1. ![ButtonPromptSprite](./addons/button_prompts_for_godot/Icons/sprite_button_prompt_icon.svg) ButtonPromptSprite
-This node is simply a sprite node that displays a button prompt icon. This is good for when you want to show button prompts on it's own, without any text around it.
+This node is a Sprite2D node that displays a single button prompt. This is good for when you want to show a single prompt with no text around it.
 
 Set the `Action` variable in it's properties to the **input map action** that you want it to display icons for.
 
+Example: `ui_up`
+
 
 ### 2. ![ButtonPromptLabel](./addons/button_prompts_for_godot/Icons/ui_button_prompt_icon.svg) ButtonPromptLabel
-This node is a `RichTextLabel` node that can insert prompt icons *between* text. This is good for when you want to have more dialogue around your button prompts.
+This node is a RichTextLabel node that can display one or multiple button prompts **in-between text**. This is good for when you want to have more dialogue around your prompts.
 
-Simply edit the `text` property of the rich text label. To insert button prompts in between text, put `{action}`. You can change the size of the prompts by adjusting the `Prompt Scale` variable.
+Edit the `text` property of the RichTextLabel, and insert button prompts in between text by using this format: `{action_name}`.
+
+You can change the size of the prompts by adjusting the `Prompt Scale` variable.
 
 Example: "Press {ui_up} to change selection, then {ui_select} to confirm your choice."
 
 > Note: The prompt nodes will only get the first button assigned to the specified `action` from your action map. That means, if you have multiple buttons assigned to an action, like joystick up and d-pad up, whatevers above will be shown on the prompt.
 
+### Settings
 
-## Configurable Settings
 In *Project > Project Settings > General* under the `Addons` category, you will see the settings for the Button Prompts addon. If you don't see it, you can type "button prompts" in the filter settings search bar. Here's what they do:
 
-### 1. Light Themed Keyboard and Mouse
+1. Light Themed Keyboard and Mouse
 This is self explanatory. Toggle this if you want your keyboard and mouse button prompts to be light themed. If not, leave as is.
 
-### 2. Positional Controller Button Pronpts
+2. Positional Controller Button Pronpts
 Instead of showing specific symbols like a, b, and y; or cross, circle, and triangle; you can show *positional button prompts* which displays an icon that instead highlights where the button is positioned.
 
-### 3. Optional Supported Controllers
+3. Optional Supported Controllers
 This setting was made so that you could disable controllers that *you may not want to load*. The textures of the different controller icons are in spritesheets, and for each controller, they are **pre-loaded on runtime**; and this option is good if you don't want that for all of them. If you think that your player base won't even use some of the supported controllers, like the PS3 for example, you may disable those controllers and prevent it's textures from being loaded. 
 
 
-## Helpful Methods
+### Helpful Methods
 There are a few helper functions that you could use to force change the icons used in prompts, this is helpful for when you want to make a settings menu that overrides the prompts to display icons for a specific controller only, and not automatically detect it. These functions are accesible through `ButtonPromptsManager.Instance`.
 
-### 1. `force_set_controller_prompts(controller_type)`
+1. `force_set_controller_prompts(controller_type)`
 You can use this to force-display a specific controller's prompt icons only. It takes in a parameter of `ButtonPromptsManager.SUPPORTED_CONTROLLERS`, which you can get from `ButtonPromptsManager.Instance`.
 
-### 2. `cycle_prev_controller()` & `cycle_next_controller()`   
+2. `cycle_prev_controller()` & `cycle_next_controller()`   
 These are pretty simple and don't require any parameters. If you forced a specific controller using the last mentioned function, you can use these functions to cycle through the list of supported controllers and update the prompt icons without having to come up with some cycling logic. 
 
 Example: in your settings you could put some arrows that call `cycle_prev_controller()` & `cycle_next_controller()` to change the controller prompts. Like "choose your controller" or something. 
