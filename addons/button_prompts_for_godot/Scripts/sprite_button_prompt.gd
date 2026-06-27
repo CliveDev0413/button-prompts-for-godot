@@ -12,8 +12,8 @@ var manager: ButtonPromptsManager;
 var using_keyboard: bool;
 var last_controller_event_device_id: int;
 
-var keybord_mouse_handler = Keyboard_Mouse_Input_Handler.new();
-var controller_handler = Controller_Input_Handler.new();
+var keybord_mouse_handler : Keyboard_Mouse_Input_Handler;
+var controller_handler : Controller_Input_Handler;
 
 func _enter_tree() -> void:
 	texture = preload("res://addons/button_prompts_for_godot/Textures/key_blank.png");
@@ -23,6 +23,11 @@ func _ready() -> void:
 	
 	manager = ButtonPromptsManager.Instance;
 
+	keybord_mouse_handler = Keyboard_Mouse_Input_Handler.new()
+	add_child(keybord_mouse_handler)
+	controller_handler = Controller_Input_Handler.new()
+	add_child(controller_handler)
+	
 	keybord_mouse_handler.on_keyboard_mouse_input.connect(_on_keyboard_mouse_input);
 	controller_handler.on_controller_input.connect(_on_controller_input);
 	manager.on_switch_controller.connect(_on_switch_controller);

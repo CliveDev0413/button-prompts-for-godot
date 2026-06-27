@@ -16,8 +16,8 @@ var last_controller_event_device_id: int;
 var actions: Array;
 var og_text: String;
 
-var keybord_mouse_handler = Keyboard_Mouse_Input_Handler.new();
-var controller_handler = Controller_Input_Handler.new();
+var keybord_mouse_handler : Keyboard_Mouse_Input_Handler;
+var controller_handler : Controller_Input_Handler;
 
 func _enter_tree() -> void:
 	bbcode_enabled = true;
@@ -31,10 +31,16 @@ func _ready() -> void:
 
 	actions = get_all_actions_in_text();
 	og_text = text;
-
+	
+	keybord_mouse_handler = Keyboard_Mouse_Input_Handler.new()
+	add_child(keybord_mouse_handler)
+	controller_handler = Controller_Input_Handler.new()
+	add_child(controller_handler)
+	
 	keybord_mouse_handler.on_keyboard_mouse_input.connect(_on_keyboard_mouse_input);
 	controller_handler.on_controller_input.connect(_on_controller_input);
-	manager.on_switch_controller.connect(_on_switch_controller);
+	manager.on_switch_controller.connect(_on_switch_controller);	
+
 
 func _input(event) -> void:	
 	if keybord_mouse_handler.detects_input(event):
