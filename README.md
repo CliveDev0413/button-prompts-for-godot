@@ -1,7 +1,7 @@
 ![Banner](.github/banner.png)
 A simple way to always display the right button prompts
 
-### ✅ Works with Godot 4.6!
+### ✅ Works with Godot 4.7!
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange.svg)](LICENSE.md)
 ![Supported Godot Version](https://img.shields.io/badge/Godot-4.x-blue)

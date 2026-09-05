@@ -66,4 +66,4 @@ position = Vector2(47, -22)
 scale = Vector2(0.26, 0.26)
 texture = ExtResource("4_p1ghx")
 script = ExtResource("5_y54a4")
-ACTION = "ui_accept"
+ACTION = "ui_select"

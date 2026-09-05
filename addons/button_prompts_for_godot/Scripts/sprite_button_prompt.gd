@@ -35,12 +35,10 @@ func _ready() -> void:
 func _input(event) -> void:
 	if keybord_mouse_handler.detects_input(event):
 		if using_keyboard: return;
-
 		using_keyboard = true;
 		keybord_mouse_handler.process_input(ACTION);
 	elif controller_handler.detects_input(event):
 		if !using_keyboard: return;
-
 		using_keyboard = false;
 		last_controller_event_device_id = event.device;
 		controller_handler.process_input(ACTION, event.device);
@@ -66,7 +64,6 @@ func _on_keyboard_mouse_input(key_name, mouse_properties, action):
 func _on_controller_input(button_properties, joystick_properties, action_has_controller, action, controller_type):
 	if action_has_controller:
 		set_sprite(manager.SUPPORTED_CONTROLLERS.keys()[controller_type]);
-		
 		if joystick_properties != null:
 			if joystick_properties.axis == 0 || joystick_properties.axis == 1:
 				frame = manager.buttons["left-stick"];
@@ -84,7 +81,6 @@ func _on_controller_input(button_properties, joystick_properties, action_has_con
 			else: 
 				set_sprite(manager.SUPPORTED_CONTROLLERS.keys()[controller_type]);
 				
-		
 		frame = manager.buttons[str(button_properties.button_index)];
 
 func _on_switch_controller(prev_prompt, new_prompt):

@@ -155,7 +155,7 @@ func get_controller_type(controller_name: String) -> SUPPORTED_CONTROLLERS:
 		buttons = maps["sony_map"].map;
 		return SUPPORTED_CONTROLLERS.dualshock_4 if !disabled_prompts.has("dualshock_4") else SUPPORTED_CONTROLLERS.dualsense;
 		
-	elif _name.contains("ps5"):
+	elif _name.contains("ps5") or _name.contains("dualsense"):
 		buttons = maps["sony_map"].map;
 		return SUPPORTED_CONTROLLERS.dualsense;
 	
